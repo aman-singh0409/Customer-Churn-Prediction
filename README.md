@@ -4,7 +4,7 @@
 
 This project is an end-to-end data analytics solution that predicts customer churn and evaluates customer retention strategies using Return on Investment (ROI) simulation. It combines machine learning, SQL analysis, and an interactive Power BI dashboard to help businesses identify high-risk customers and recommend the most cost-effective retention strategy.
 
-The project is built using the IBM Telco Customer Churn dataset and follows a complete analytics workflow from data preprocessing to business decision support. :contentReference[oaicite:0]{index=0}
+The project is built using the IBM Telco Customer Churn dataset and follows a complete analytics workflow from data preprocessing to business decision support.
 
 ---
 
@@ -22,7 +22,7 @@ This project addresses both problems by:
 
 ## Dataset
 
-**Source:** IBM Telco Customer Churn Dataset (Kaggle)
+**Source:** [IBM Telco Customer Churn Dataset (Kaggle)](https://www.kaggle.com/datasets/blastchar/telco-customer-churn)
 
 - ~7,043 customer records
 - 21 original features
@@ -104,25 +104,55 @@ Developed a three-page interactive dashboard consisting of:
 
 ---
 
-## Key Insights
+## Results
 
-- Month-to-month customers exhibit the highest churn rate.
-- Customers with shorter tenure are significantly more likely to churn.
-- High-risk customers contribute the majority of expected revenue at risk.
-- Feature importance analysis identifies contract type, tenure, and monthly charges among the strongest churn drivers.
-- ROI simulation enables comparison of retention strategies to support business decision-making.
+### Model Performance
+- **Algorithm:** Random Forest Classifier
+- **ROC-AUC:** 0.89
+- **Precision (churn class):** 57%
+- **Recall (churn class):** 83%
+- **F1-Score (churn class):** 0.68
+- **Overall accuracy:** 79%
+
+Precision/recall are reported alongside accuracy because the dataset has a ~73/27 class imbalance — a model that always predicts "no churn" would score ~73% accuracy while being useless. The model is tuned to favor recall, catching more true churners at the cost of some false positives, which is the right tradeoff when the cost of missing a churner outweighs the cost of an unnecessary retention offer.
+
+### Customer Risk Segmentation
+
+| Segment | Customers | % of Base |
+|---|---|---|
+| Low Risk | 3,241 | 46.0% |
+| Medium Risk | 1,616 | 22.9% |
+| High Risk | 2,186 | 31.0% |
+
+### Key Business Findings
+- **Contract type is the strongest churn driver:** month-to-month customers churn at **42.7%**, versus 11.3% for one-year contracts and just 2.8% for two-year contracts.
+- **Tenure drives risk sharply downward over time:** churn falls from **47.4%** in the first 12 months to just **6.6%** by months 61–72.
+- **Payment method matters:** electronic check users churn at **45.3%**, nearly 3x the rate of automatic bank transfer (16.7%) or credit card (15.2%) customers.
+- **High-risk customers are almost entirely month-to-month:** 99.95% of the High Risk segment is on a month-to-month contract, confirming contract type as the dominant risk factor.
+
+### Revenue at Risk
+- **Total annual revenue at risk (all customers):** ₹24,17,972
+- **Revenue at risk from the High-Risk segment alone:** ₹15,33,136 (**63.4%** of total, from just 31% of customers) — a clear concentration effect that justifies prioritizing retention spend on this group.
+
+### ROI Strategy Simulation (High-Risk segment, n = 2,186)
+
+| Strategy | Total Cost | Revenue Saved | Net Benefit | ROI % |
+|---|---|---|---|---|
+| 20% Discount | ₹4,02,569 | ₹5,36,597 | ₹1,34,028 | 33.3% |
+| **Outreach Call** | ₹3,27,900 | ₹6,89,911 | **₹3,62,011** | **110.4%** |
+| Feature Nudge | ₹6,55,800 | ₹3,83,284 | -₹2,72,516 | -41.6% |
+
+**Recommended strategy: Outreach Call.** It delivers the highest ROI (110.4%) and the largest net benefit (₹3,62,011) at the lowest cost of the three options tested. The Feature Nudge strategy actually loses money under these assumptions — its cost outweighs the revenue it saves — showing that the simulation stress-tests strategies rather than assuming every intervention pays off.
+
+*Retention strategy costs and effectiveness assumptions (e.g. 45% churn-reduction for outreach calls) are modeling assumptions, not measured facts, and are documented as adjustable parameters in the ROI simulation notebook.*
 
 ---
 
 ## Tech Stack
 
-- Python
-- Pandas
-- NumPy
-- Scikit-learn
-- SQL (MySQL)
-- Power BI
-- DAX
+- Python (Pandas, NumPy, Scikit-learn)
+- SQL (MySQL / SQLite)
+- Power BI, DAX
 - Jupyter Notebook
 
 ---
@@ -132,17 +162,19 @@ Developed a three-page interactive dashboard consisting of:
 ### Executive Overview
 Displays overall business KPIs including customer count, churn rate, high-risk customers, revenue at risk, churn distribution, contract analysis, and tenure-based churn trends.
 
-![Executive Overview](Dashboard/Screenshots/executive-overview.png.png)
+![Executive Overview](Dashboard/Screenshots/executive-overview.png)
 
 ### Customer Segmentation
 Visualizes customer risk distribution, revenue at risk across services and payment methods, customer value versus churn probability, and machine learning feature importance.
 
-![Customer Segmentation](Dashboard/Screenshots/customer-segmentation.png.png)
+![Customer Segmentation](Dashboard/Screenshots/customer-segmentation.png)
 
 ### ROI Strategy Simulator
 Compares retention strategies using ROI, net benefit, total cost, and revenue saved with an interactive effectiveness parameter for scenario analysis.
 
-![ROI Strategy Simulator](Dashboard/Screenshots/roi-simulator.png.png)
+![ROI Strategy Simulator](Dashboard/Screenshots/roi-simulator.png)
+
+---
 
 ## Future Improvements
 
@@ -156,6 +188,5 @@ Compares retention strategies using ROI, net benefit, total cost, and revenue sa
 
 ## Author
 
-Aman Kumar Singh
-
+**Aman Kumar Singh**
 B.Tech Computer Science Engineering
