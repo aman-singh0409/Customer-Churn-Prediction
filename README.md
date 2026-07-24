@@ -131,8 +131,10 @@ Precision/recall are reported alongside accuracy because the dataset has a ~73/2
 - **High-risk customers are almost entirely month-to-month:** 99.95% of the High Risk segment is on a month-to-month contract, confirming contract type as the dominant risk factor.
 
 ### Revenue at Risk
-- **Total annual revenue at risk (all customers):** ₹24,17,972
-- **Revenue at risk from the High-Risk segment alone:** ₹15,33,136 (**63.4%** of total, from just 31% of customers) — a clear concentration effect that justifies prioritizing retention spend on this group.
+- **Revenue at risk (monthly charges of churned customers):** ₹1,39,131
+- **High-risk customers as a share of total base:** 31.0% (2,186 of 7,043) — a disproportionate concentration of risk relative to the size of the segment.
+
+*Note: "Revenue at Risk" here is calculated as the sum of monthly charges for customers who have already churned, matching the dashboard's Executive Overview KPI. An alternative, more forward-looking metric — expected revenue at risk (`churn_probability × annual value`, summed across the full customer base) — comes out to ₹24,17,972 and can be used if you want a predictive rather than historical framing; just make sure the README and dashboard agree on which definition is being shown.*
 
 ### ROI Strategy Simulation (High-Risk segment, n = 2,186)
 
