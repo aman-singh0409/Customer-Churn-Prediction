@@ -1,0 +1,4 @@
+strategy,segment,customers_targeted,total_cost,total_revenue_saved,net_benefit,roi_pct
+20% Discount,High Risk,2186,402569.16,536597.46,134028.3,33.3
+Outreach Call,High Risk,2186,327900.0,689911.02,362011.02,110.4
+Feature Nudge,High Risk,2186,655800.0,383283.9,-272516.1,-41.6
