@@ -132,11 +132,17 @@ Developed a three-page interactive dashboard consisting of:
 ### Executive Overview
 Displays overall business KPIs including customer count, churn rate, high-risk customers, revenue at risk, churn distribution, contract analysis, and tenure-based churn trends.
 
+![Executive Overview](Dashboard/screenshots/executive-overview.png)
+
 ### Customer Segmentation
 Visualizes customer risk distribution, revenue at risk across services and payment methods, customer value versus churn probability, and machine learning feature importance.
 
+![Customer Segmentation](Dashboard/screenshots/customer-segmentation.png)
+
 ### ROI Strategy Simulator
 Compares retention strategies using ROI, net benefit, total cost, and revenue saved with an interactive effectiveness parameter for scenario analysis.
+
+![ROI Strategy Simulator](Dashboard/screenshots/roi-simulator.png)
 
 ## Future Improvements
 
